@@ -1,17 +1,9 @@
 import pysam
 
-def get_names(names):
-    with open(names, 'r') as infile:
-        n = infile.read().splitlines()
-    if '' in n:
-        n.remove('')
-    return n
-
 def extract_reads(options):
-    n = get_names(options.names)
-    bamfile = pysam.AlignmentFile(options.bam, 'rb')
+    bamfile = pysam.AlignmentFile(options.input, 'rb')
     header = bamfile.header.copy()
-    out = pysam.Samfile(options.out, 'wb', header=header)
+    out = pysam.Samfile(options.output, 'wb', header=header)
 
     for read in bamfile.fetch():
         if read.is_paired:
@@ -27,7 +19,7 @@ if __name__ == "__main__":
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description='Extract reads containing indels')
-    parser.add_argument('-i', '--in', help='bam file', required=True)
-    parser.add_argument('-o', '--out', help='bam file output containg indels', required=True)
+    parser.add_argument('-i', '--input', help='bam file', required=True)
+    parser.add_argument('-o', '--output', help='bam file output containg indels', required=True)
     options = parser.parse_args()
     extract_reads(options)

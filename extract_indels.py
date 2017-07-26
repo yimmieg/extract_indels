@@ -1,5 +1,12 @@
 import pysam
 
+def get_names(names):
+    with open(names, 'r') as infile:
+        n = infile.read().splitlines()
+    if '' in n:
+        n.remove('')
+    return n
+
 def extract_reads(options):
     n = get_names(options.names)
     bamfile = pysam.AlignmentFile(options.bam, 'rb')

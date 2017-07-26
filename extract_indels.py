@@ -13,8 +13,8 @@ def extract_reads(options):
                 out.write(read)
                 out.write(mate)
 
-bamfile.close()
-out.close()
+    bamfile.close()
+    out.close()
 
 if __name__ == "__main__":
     from argparse import ArgumentParser

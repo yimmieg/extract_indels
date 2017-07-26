@@ -7,10 +7,11 @@ def extract_reads(options):
 
     for read in bamfile.fetch():
         if read.is_paired:
-            if(read.cigarstring.find("I") or read.cigarstring.find("D")):
-                mate = bamfile.mate(read)
-                out.write(read)
-                out.write(mate)
+            if( not( read.is_unmapped ) ):
+                if(read.cigarstring.find("I") or read.cigarstring.find("D")):
+                    mate = bamfile.mate(read)
+                    out.write(read)
+                    out.write(mate)
 
     bamfile.close()
     out.close()

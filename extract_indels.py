@@ -13,7 +13,7 @@ def extract_reads(options):
             for (cigarType,cigarLength) in cigarLine:
                try:
                    if(cigarType == 0): #match
-                    elif(cigarType == 1 || cigarType == 2): #insertions
+               elif(cigarType == 1 or cigarType == 2): #insertions
                      mate <- bamfile.mate(read)
                      out.write(read)
                      out.write(mate)

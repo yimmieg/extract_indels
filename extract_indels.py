@@ -8,7 +8,7 @@ def extract_reads(options):
     for read in bamfile.fetch():
         if read.is_paired:
             if(read.cigarstring.find("I") or read.cigarstring.find("D")):
-                mate <- bamfile.mate(read)
+                mate = bamfile.mate(read)
                 out.write(read)
                 out.write(mate)
 
